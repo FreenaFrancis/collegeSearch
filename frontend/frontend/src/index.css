@@ -1,0 +1,73 @@
+.form-container {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 200px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Add this CSS to your existing styles or create a new CSS file and import it */
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Image styles */
+/* img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 50%;
+} */
+
+/* Hover effect */
+tr:hover {
+  background-color: #f5f5f5;
+}

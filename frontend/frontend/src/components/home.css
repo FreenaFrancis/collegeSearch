@@ -1,0 +1,85 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.main {
+    background-image: url('https://media.discordapp.net/attachments/1143761699820806145/1205004315828428830/college.jpg?ex=65e00538&is=65cd9038&hm=c34e133772500084bbfa750aaee8d4c48d1da61b30217620cd189258e243c4ea&=&format=webp&width=891&height=593');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.navbar-nav li  {
+    font-size: 20px;
+    color: white;
+    justify-content: space-between;
+padding: 20px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: rgb(212, 214, 214);
+    transition: all 0.3s ease;
+    transform: translateX(-250px);
+}
+
+#sidebar-content {
+    padding: 5rem;
+    color: white;
+    margin-top: 25px;
+    font-size: larger;
+}
+
+.hidden {
+    transform: translateX(0);
+}
+
+.submain {
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+    width: 100%;
+    text-align: center;
+}
+
+.submain h4 {
+    color: white;
+    margin: 20px;
+    font-size: 35px;
+}
+
+.submain a {
+    text-decoration: none;
+    color: white;
+}
+
+.subnav {
+    margin-left: 520px;
+}
+
+.subnav li a i {
+    padding-left: 55px;
+    font-size: 25px;
+}
+
+.sidebar-content li{
+    padding: 100px;
+}

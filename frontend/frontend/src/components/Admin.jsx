@@ -12,6 +12,7 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import UserView from '../pages/ViewUsers';
 
 function Admin() {
   const [message, setMessage] = useState('');
@@ -24,7 +25,7 @@ function Admin() {
         if (res.data === "Success") {
           setMessage("Admin");
         } else {
-          navigate('/home');
+          // navigate('/home');
         }
       })
       .catch(err => console.log(err));
@@ -58,21 +59,21 @@ function Admin() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
              Edusphere
             </Typography>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-           <Link to={'/adminviewrecruiter'}>  View all recruiters</Link>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1,color:'white' }}>
+           <Link to={'/adminviewrecruiter'}  style={{color:'white',textDecoration:'none'}}>  Manage recruiters</Link>
             </Typography>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-         <Link to={'/admincourse'}>    View all course</Link>
+         <Link to={'/admincourse'}  style={{color:'white',textDecoration:'none'}}>    Managecourse</Link>
             </Typography>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-         <Link to={'/adminviewplacement'}>    View All Placements</Link>
+         <Link to={'/adminviewplacement'}  style={{color:'white',textDecoration:'none'}}>    Manage Placements</Link>
             </Typography>
             
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-             view all college
+            <Link to={'/adminviewcollege'}  style={{color:'white',textDecoration:'none'}}>    Manage Colleeg</Link>
             </Typography>
-            <Button color="inherit">{message}</Button>
+            <h2>{message}</h2>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -81,31 +82,34 @@ function Admin() {
           onClose={handleDrawerClose} // Close drawer when clicking outside or on close button
         >
           <List style={{ width: '200px' }}>
-            <ListItem button onClick={handleDrawerClose}>
-              <ListItemText primary="Home" />
+          <Link to={'/viewuser'}  style={{color:'black',textDecoration:'none'}}>
+          <ListItem button onClick={handleDrawerClose}>
+              <ListItemText primary="Users List" />
             </ListItem>
+          </Link>
             <ListItem button onClick={handleDrawerClose}>
-              <Link to="/addcourse">
+              <Link to="/addcourse"  style={{color:'black',textDecoration:'none'}}>
                 <ListItemText primary="AddCourse" />
               </Link>
             </ListItem>
             <ListItem button onClick={handleDrawerClose}>
-              <Link to="/addplacement">
+              <Link to="/placement" style={{color:'black',textDecoration:'none'}}> 
                 <ListItemText primary="AddPlacement" />
               </Link>
             </ListItem>
             <ListItem button onClick={handleDrawerClose}>
-              <Link to="/addcollege">
+              <Link to="/addcollege" style={{color:'black',textDecoration:'none'}}>
                 <ListItemText primary="AddCollege" />
               </Link>
             </ListItem>
             <ListItem button onClick={handleDrawerClose}>
-              <Link to="/addrecruiter">
+              <Link to="/addrecruiter" style={{color:'black',textDecoration:'none'}}>
                 <ListItemText primary="Recruiters" />
               </Link>
             </ListItem>
           </List>
         </Drawer>
+        {/* <UserView/> */}
       </Box>
       <Outlet />
     </div>

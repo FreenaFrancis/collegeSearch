@@ -1,22 +1,23 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import NavBars from '../components/Home';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  axios.defaults.withCredentials = true;
-
+const {id} = useParams()
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post("http://localhost:7000/api/user/login", { email, password })
       .then(res => {
         if (res.data.Status === "Success") {
+          const userId = res.data.userId; // Adjust the property name as per your server response
           if (res.data.role === "admin") {
             navigate("/admin");
           } else {
-            navigate("/home");
+            navigate(`/home/${id}`); // Pass userId as a parameter to the home page
           }
         } else {
           // Handle unsuccessful login (e.g., display an error message)
@@ -25,9 +26,12 @@ function Login() {
       })
       .catch(err => console.error(err));
   };
+  
+  
 
   return (
     <div>
+    <NavBars/>
       <div className="auth-container">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>

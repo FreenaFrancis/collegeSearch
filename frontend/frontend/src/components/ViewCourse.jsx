@@ -25,7 +25,7 @@ function ViewCourse() {
           <thead>
             <tr>
               <th>Course Name</th>
-              <th>Duration</th>
+              {/* <th>Duration</th> */}
               <th>Total Fees</th>
               <th>Eligibility</th>
               <th colSpan={2}>Action</th>
@@ -35,7 +35,7 @@ function ViewCourse() {
             {courses.map(course => (
               <tr key={course._id}>
                 <td>{course.coursename}</td>
-                <td>{course.duration}</td>
+                {/* <td>{course.duration}</td> */}
                 <td>{course.totalfees}</td>
                 <td>{course.eligibility}</td>
                 {/* Pass collegeId as a parameter in the link */}

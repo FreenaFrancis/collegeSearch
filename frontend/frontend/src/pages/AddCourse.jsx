@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddCourse = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const AddCourse = () => {
     totalfees: '',
     eligibility: ''
   });
+  const navigate=useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +25,8 @@ const AddCourse = () => {
       // Send formData to the backend
       const response = await axios.post('http://localhost:7000/api/college/addcourse', formData);
       console.log(response.data); // Assuming the backend sends back some response
+    alert("courses added successfully")
+    navigate('/admin')
     } catch (error) {
       console.error('Error:', error);
     }

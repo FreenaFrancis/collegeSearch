@@ -8,6 +8,7 @@ const RecruitersModel = require('../models/Recruiters');
 const recruitersModel = require('../models/Recruiters');
 const courseModel = require('../models/Course');
 const applicationModel=require('../models/Application')
+const userModel=require('../models/user')
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'public/images');
@@ -80,9 +81,60 @@ router.get('/getcollegebyid/:id', async (req, res) => {
     res.status(500).json({ error: "Failed to retrieve college by ID" });
   }
 });
+// ////delete
+router.delete('/deleteCollege/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedCollege = await CollegeModel.findByIdAndDelete(id);
+    if (!deletedCollege) {
+      return res.status(404).json({ message: 'College not found' });
+    }
+    res.json({ message: 'College deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting college:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+// update college
+router.put('/updateCollege/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedCollege = await CollegeModel.findByIdAndUpdate(id, req.body, { new: true });
+    if (!updatedCollege) {
+      return res.status(404).json({ message: 'College not found' });
+    }
+    res.json(updatedCollege);
+  } catch (error) {
+    console.error('Error updating college:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
+// we have get before updating
+
+router.get('/getclgbyid/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const college = await CollegeModel.findById(id); // Corrected CollegeModel
+    res.json(college);
+    console.log(college);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to retrieve college" });
+  }
+});
 
 
-
+// for applied colleges
+router.get("/getcoll",async(req,res)=>{
+  try{
+    const coll=await courseModel.find({})
+    res.json(coll);
+    console.log(coll);
+  }catch(err){
+    console.log(err);
+  }
+})
 // ///////////////////////////////////////////////////////////////////////////////////////////////////
 // recruiters
 router.post('/addrecruiter', upload.single('image'), async (req, res) => {
@@ -229,7 +281,18 @@ router.get('/getcoursebyid/:id',(req,res)=> {
   .catch(err =>res.json(err))
 })
 
-// /////////////////////////////////////Application//////////////////////////////////////////////////////
+
+router.get('/getcourse', async (req, res) => {
+  try {
+    const courses = await courseModel.find();
+    res.json(courses); // Sending the courses as JSON response
+  } catch (err) {
+    console.error('Error fetching courses:', err);
+    res.status(500).json({ error: 'Internal server error' }); // Sending an error response
+  }
+});
+
+// // /////////////////////////////////////Application//////////////////////////////////////////////////////
 
 router.post('/application', async (req, res) => {
   try {
@@ -242,6 +305,18 @@ router.post('/application', async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+// //////////////////////////////////////applied
+// router.get('/appliedcolleges/:collegeid', async (req, res) => {
+//   try {
+//     // Fetch applied colleges based on collegeid and userid
+//     const { collegeid, userid } = req.params;
+//     const applications = await applicationModel.find({ collegeid, userid });
+//     res.status(200).json(applications);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to fetch applied colleges', details: error.message });
+//   }
+// });
 
 
 
@@ -321,5 +396,67 @@ router.get('/getplacementbyid/:id', async (req, res) => {
   }
 });
 
+// //////////////////////////////////
+// router.post('/application/:courseId', async (req, res) => {
+//   try {
+//     const { username, email, address, city, contact, highestqualification, percentage } = req.body;
+//     const { courseId } = req.params;
+
+//     // Fetch course details
+//     const course = await courseModel.findById(courseId);
+
+//     // Create a new application document
+//     const application = new applicationModel({ 
+//       username, 
+//       email, 
+//       address, 
+//       city, 
+//       contact, 
+//       highestqualification, 
+//       percentage, 
+//       course: courseId 
+//     });
+
+//     // Save the application to the database
+//     await application.save();
+
+//     // Send response
+//     res.status(201).json({ application, course });
+//   } catch (err) {
+//     console.error("Error submitting application:", err);
+//     res.status(500).json({ error: "An error occurred while processing your request" });
+//   }
+// });
+// router.get('/appliedcolleges/:id', async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const applications = await applicationModel.find({ userId: id }).populate('course');
+//     res.status(200).json(applications);
+//   } catch (err) {
+//     console.error("Error fetching applied colleges:", err);
+//     res.status(500).json({ error: "An error occurred while processing your request" });
+//   }
+// });
+
+// router.get('/appliedcolleges', async (req, res) => {
+//   try {
+//     const applications = await applicationModel.find({}).populate('course');
+//     res.json(applications);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
+router.get('/getapplication', (req, res) => {
+  applicationModel.find()
+    .then((getapply) => {
+      res.json(getapply);
+      console.log(getapply);
+    })
+    .catch((err) => {
+      console.error(err); // Fixed syntax error here by changing 'console.log' to 'console.error'
+      res.status(500).json({ message: 'Internal server error' }); // Added response for error
+    });
+});
 
 module.exports = router;

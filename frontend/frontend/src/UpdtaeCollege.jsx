@@ -1,55 +1,70 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function AddCollege() {
-  const [formData, setFormData] = useState({
-    collegename: '',
-    location: '',
-    contact: '',
-    description: '',
-    street: '',
-    city: '',
-    image: '',
-    duration: '',
-    fees: '',
-    eligibility: ''
-  });
 
-  const navigate=useNavigate('/')
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleImageChange = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const formDataToSend = new FormData();
-      for (const key in formData) {
-        formDataToSend.append(key, formData[key]);
+    
+function UpdateCollege() {
+    const { id } = useParams();
+    const [formData, setFormData] = useState({
+      collegename: '',
+      location: '',
+      contact: '',
+      description: '',
+      street: '',
+      city: '',
+      image: '',
+      duration: '',
+      fees: '',
+      eligibility: ''
+    });
+  const navigate=useNavigate()
+    useEffect(() => {
+      async function fetchCollegeData() {
+        try {
+          const response = await axios.get(`http://localhost:7000/api/college/getcollegebyid/${id}`);
+          const collegeData = response.data;
+          setFormData(collegeData);
+        } catch (error) {
+          console.error('Error fetching college data:', error);
+        }
       }
-      const response = await axios.post('http://localhost:7000/api/college/addcollege', formDataToSend);
-      console.log('College added successfully:', response.data);
-      // Optionally, you can redirect the user to another page or show a success message
-      alert('college added successfully')
-      navigate('/admin')
-    } catch (error) {
-      console.error('Error adding college:', error);
-    }
-  };
-
+      fetchCollegeData();
+    }, [id]);
+  
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({ ...prevState, [name]: value }));
+      };
+      
+  
+      const handleImageChange = (e) => {
+        setFormData(prevState => ({ ...prevState, image: e.target.files[0] }));
+      };
+      
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const formDataToSend = new FormData();
+        for (const key in formData) {
+          formDataToSend.append(key, formData[key]);
+        }
+        const response = await axios.put(`http://localhost:7000/api/college/updateCollege/${id}`, formDataToSend);
+        console.log('College updated successfully:', response.data);
+        alert('College updated successfully');
+        navigate('/adminviewcollege')
+      } catch (error) {
+        console.error('Error updating college:', error);
+      }
+    };
+  
   return (
     <div className='container'>
-      <h2 style={{marginLeft:'600px'}}>Add College</h2>
     <Form onSubmit={handleSubmit}>
-      
+      <h2 style={{marginLeft:'600px'}}>Update College</h2>
       <Form.Group controlId="collegename">
         <Form.Label>College Name</Form.Label>
         <Form.Control type="text" name="collegename" value={formData.collegename} onChange={handleChange} placeholder="Enter college name" />
@@ -108,4 +123,4 @@ function AddCollege() {
   );
 }
 
-export default AddCollege;
+export default UpdateCollege;

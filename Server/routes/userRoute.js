@@ -60,4 +60,14 @@ router.post('/login', (req, res) => {
         });
 });
 
+router.get('/getallusers', async (req, res) => {
+    try {
+        const users = await userModel.find({});
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
 module.exports = router;

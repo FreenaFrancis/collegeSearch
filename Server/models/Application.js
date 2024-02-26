@@ -9,6 +9,7 @@ const applicationSchema = mongoose.Schema({
     highestqualification: { type: String },
     percentage: { type: String },
     course: { type: String },
+    college:{type:String},
 });
 
 const ApplicationModel = mongoose.model("Application", applicationSchema);

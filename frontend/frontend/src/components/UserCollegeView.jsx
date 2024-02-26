@@ -82,7 +82,7 @@ function UserCollegeView() {
                         />
                     </div>
                     <div className='col-md-3'>
-                        <select
+                        {/* <select
                             className='form-control'
                             value={filterType}
                             onChange={handleFilterChange}
@@ -92,7 +92,7 @@ function UserCollegeView() {
                             <option value='pg'>PG</option>
                             <option value='diploma'>DIPLOMA</option>
                             <option value='polytechnic'>POLYTECHNIC</option>
-                        </select>
+                        </select> */}
                     </div>
                 </div>
             </div>

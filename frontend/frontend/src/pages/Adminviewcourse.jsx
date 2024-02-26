@@ -18,14 +18,16 @@ function AdminViewCourse() {
 
   useEffect(() => {
     // Fetch data from MongoDB
-    axios.get('http://localhost:7000/api/college/allcourse') // Adjust the URL based on your backend API endpoint
+    axios.get('http://localhost:7000/api/college/allcourse')
       .then(response => {
+        console.log('Courses:', response.data); // Log fetched data
         setCourses(response.data);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-  }, []); // Run this effect only once, when the component mounts
+  }, []);
+   // Run this effect only once, when the component mounts
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import NavBars from '../components/Home';
 function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,7 +24,9 @@ function Signup() {
 
   return (
     <div>
+       <NavBars/>
       <div className="auth-container">
+       
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="Username" required value={name} onChange={(e) => setName(e.target.value)} />

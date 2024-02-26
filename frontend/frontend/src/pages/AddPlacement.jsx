@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // for making HTTP requests, you might need to install axios using npm or yarn
+import { useNavigate } from 'react-router-dom';
+
 
 const AddPlacement = () => {
     const [formData, setFormData] = useState({
@@ -13,7 +15,7 @@ const AddPlacement = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+const navigate=useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -26,6 +28,7 @@ const AddPlacement = () => {
                 statistics: '',
                 year: ''
             });
+            navigate('/admin')
         } catch (error) {
             console.error('Error:', error);
         }

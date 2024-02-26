@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-const Application= () => {
+import { useParams, useNavigate } from 'react-router-dom';
+
+const Application = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -10,10 +11,14 @@ const Application= () => {
     contact: '',
     highestqualification: '',
     percentage: '',
-    course: ''
+    course: '',
+    college: ''
   });
 
-  const{id}=useParams()
+  const [courses, setCourses] = useState([]);
+  const [colleges, setColleges] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -25,12 +30,51 @@ const Application= () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:7000/api/college/application", formData);
+      const selectedCourse = courses.find(course => course.coursename === formData.course);
+      const selectedCollege = colleges.find(college => college.collegename === formData.college);
+
+      if (!selectedCourse || !selectedCollege) {
+        throw new Error("Selected course or college not found");
+      }
+
+      const { _id: courseId } = selectedCourse;
+      const { _id: collegeId } = selectedCollege;
+
+      const payload = {
+        ...formData,
+        course: courseId,
+        college: collegeId
+      };
+
+      await axios.post('http://localhost:7000/api/college/application', payload);
+
       console.log("Form submitted successfully!");
+      alert("Application sent successfully");
+      navigate(`/appliedcolleges`);
     } catch (err) {
       console.error("Error submitting form:", err);
     }
   };
+
+  useEffect(() => {
+    axios.get('http://localhost:7000/api/college/allcourse')
+      .then(response => {
+        setCourses(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching courses:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get('http://localhost:7000/api/college/getallcollege')
+      .then(response => {
+        setColleges(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching colleges:", error);
+      });
+  }, []);
 
   return (
     <div className="container mt-5">
@@ -68,10 +112,18 @@ const Application= () => {
           <label htmlFor="course" className="form-label">Course:</label>
           <select className="form-select" id="course" name="course" value={formData.course} onChange={handleChange}>
             <option value="">Select a course</option>
-            <option value="Course 1">Course 1</option>
-            <option value="Course 2">Course 2</option>
-            <option value="Course 3">Course 3</option>
-            {/* Add more options as needed */}
+            {courses.map(course => (
+              <option key={course._id} value={course.coursename}>{course.coursename}</option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="college" className="form-label">College:</label>
+          <select className="form-select" id="college" name="college" value={formData.college} onChange={handleChange}>
+            <option value="">Select a college</option>
+            {colleges.map(college => (
+              <option key={college._id} value={college.collegename}>{college.collegename}</option>
+            ))}
           </select>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>

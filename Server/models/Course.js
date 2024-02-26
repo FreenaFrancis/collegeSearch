@@ -4,7 +4,7 @@ const courseSchema=mongoose.Schema({
     coursename:{
         type:String
     },
-    Duration:{
+    duration:{
         type:String
     },
 

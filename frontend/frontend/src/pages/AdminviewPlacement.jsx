@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
-
+// import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
 const ViewPlacement = () => {
     const [placements, setPlacements] = useState([]);
     const { id } = useParams(); // Destructure id from useParams
@@ -32,7 +34,8 @@ const ViewPlacement = () => {
 
     return (
         <div className="container">
-            <h2>Placement Data</h2>
+              <Link to={'/admin'}><FontAwesomeIcon icon={faArrowLeft} style={{color:"black", marginTop:'60px',marginLeft:'100px'}}/></Link>
+            <h2 style={{paddingLeft:'500px',paddingBottom:'10px'}}>Placement Data</h2>
             <table className="table table-striped">
                 <thead>
                     <tr>

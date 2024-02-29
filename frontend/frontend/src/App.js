@@ -89,10 +89,11 @@ import Admin from './components/Admin';
 import Application from './components/Application';
 import AppliedColleges from './components/AppliedColleges';
 import AdminViewCollege from './pages/AdminCollgeView';
-import UpdateCollege from './UpdtaeCollege';
+// import UpdateCollege from './UpdtaeCollege';
 import UserView from './pages/ViewUsers';
 import UpdatePlacement from './pages/updatePlacement';
 import NavBars from './components/Home';
+import UpdateCollege from './pages/UpdtaeCollege';
 
 function App() {
   return (
@@ -102,7 +103,7 @@ function App() {
           <Route path='/' element={<NavBars/>}/>
           <Route path='/register' element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/home/:id' element={<UserHome />} />
+          <Route path='/home' element={<UserHome />} />
           <Route path='/addcollege' element={<AddCollege />} />
           <Route path='/viewallcollege' element={<ViewCollege />} />
           <Route path='/usercollege' element={<UserCollegeView />} />

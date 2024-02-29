@@ -9,6 +9,19 @@ const recruitersModel = require('../models/Recruiters');
 const courseModel = require('../models/Course');
 const applicationModel=require('../models/Application')
 const userModel=require('../models/user')
+
+const { body } = require('express-validator');
+
+const validatePhoneNumber = (value) => {
+  // Your validation logic here
+  // For example, you can use a regular expression to check if the value is a valid phone number
+  const phoneNumberPattern = /^\d{10}$/; // Assuming a 10-digit phone number format
+  if (!phoneNumberPattern.test(value)) {
+    throw new Error('Invalid phone number');
+  }
+  // Return true if validation succeeds
+  return true;
+};
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'public/images');
@@ -294,17 +307,7 @@ router.get('/getcourse', async (req, res) => {
 
 // // /////////////////////////////////////Application//////////////////////////////////////////////////////
 
-router.post('/application', async (req, res) => {
-  try {
-    const { username, email, address, city, contact, highestqualification, percentage, course } = req.body;
-    const apply = new applicationModel({ username, email, address, city, contact, highestqualification, percentage, course });
-    await apply.save();
-    res.status(201).json({ message: "Application submitted successfully", data: apply });
-  } catch (err) {
-    console.error("Error submitting application:", err);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+
 
 // //////////////////////////////////////applied
 // router.get('/appliedcolleges/:collegeid', async (req, res) => {
@@ -458,5 +461,47 @@ router.get('/getapplication', (req, res) => {
       res.status(500).json({ message: 'Internal server error' }); // Added response for error
     });
 });
+
+router.post('/application', async (req, res) => {
+  try {
+    const { username, email, address, city, contact, highestqualification, percentage, course } = req.body;
+    const apply = new applicationModel({ username, email, address, city, contact, highestqualification, percentage, course });
+    await apply.save();
+    res.status(201).json({ message: "Application submitted successfully", data: apply });
+  } catch (err) {
+    console.error("Error submitting application:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+// router.post('/application', [
+//   // Validate fields using express-validator
+//   body('username').trim().notEmpty().withMessage('Username is required'),
+//   body('email').trim().isEmail().withMessage('Invalid email address'),
+//   body('address').trim().notEmpty().withMessage('Address is required'),
+//   body('city').trim().notEmpty().withMessage('City is required'),
+//   body('contact').trim().custom(validatePhoneNumber).withMessage('Invalid phone number'),
+//   body('highestqualification').trim().notEmpty().withMessage('Highest qualification is required'),
+//   body('percentage').trim().notEmpty().withMessage('Percentage is required'),
+//   body('course').trim().notEmpty().withMessage('Course is required'),
+//   body('college').trim().notEmpty().withMessage('College is required')
+// ], async (req, res) => {
+//   try {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+
+//     const { username, email, address, city, phonenumber, highestqualification, percentage, course, college } = req.body;
+//     const application = new applicationModel({ username, email, address, city, phonenumber, highestqualification, percentage, course, college });
+//     await application.save();
+//     res.status(201).json({ message: "Application submitted successfully", data: application });
+//   } catch (err) {
+//     console.error("Error submitting application:", err);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
+
 
 module.exports = router;

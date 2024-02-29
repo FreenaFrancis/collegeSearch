@@ -5,7 +5,7 @@ const applicationSchema = mongoose.Schema({
     email: { type: String },
     address: { type: String },
     city: { type: String },
-    contact: { type: String },
+    phonenumber: { type: Number },
     highestqualification: { type: String },
     percentage: { type: String },
     course: { type: String },

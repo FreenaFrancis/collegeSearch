@@ -16,8 +16,11 @@ const {id} = useParams()
           const userId = res.data.userId; // Adjust the property name as per your server response
           if (res.data.role === "admin") {
             navigate("/admin");
+            alert("admin login successfully")
           } else {
-            navigate(`/home/${id}`); // Pass userId as a parameter to the home page
+            
+            navigate(`/home`); // Pass userId as a parameter to the home page
+          alert("userlogined successfully")
           }
         } else {
           // Handle unsuccessful login (e.g., display an error message)

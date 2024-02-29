@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios'; // for making HTTP requests, you might need to install axios using npm or yarn
 import { useNavigate } from 'react-router-dom';
 
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
+import { Link } from 'react-router-dom';
 const AddPlacement = () => {
     const [formData, setFormData] = useState({
         
@@ -36,7 +38,10 @@ const navigate=useNavigate()
     
 
     return (
+        <div>
+                    <Link to={'/admin'}><FontAwesomeIcon icon={faArrowLeft} style={{color:"black", paddingTop:'50px',marginLeft:'100px'}}/></Link>
         <div className="form-container">
+            
             <h2>Placement Form</h2>
             <form onSubmit={handleSubmit}>
              
@@ -54,6 +59,7 @@ const navigate=useNavigate()
                 </div>
                 <button type="submit" className="submit-button">Submit</button>
             </form>
+        </div>
         </div>
     );
 };

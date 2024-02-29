@@ -10,7 +10,15 @@ const userRoute=require('./routes/userRoute')
 const collegeRoute=require('./routes/collegeRoute')
 const path=require('path')
 const port=7000;
+const { body, validationResult } = require('express-validator');
 
+
+const validatePhoneNumber = (value) => {
+  if (!value.match(/^\d{10}$/)) {
+    throw new Error('Invalid phone number');
+  }
+  return true;
+};
 app.use(express.json());
 
 app.use(cookieParser());

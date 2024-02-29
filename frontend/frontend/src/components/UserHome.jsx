@@ -31,16 +31,16 @@ function UserHome() {
                                     {/* <a className="nav-link" aria-current="page" href="#"><FontAwesomeIcon icon={faWhatsapp} /></a> */}
                                 </li>
                                 <li className="nav-item">
-                                    <Link to={'/usercollege'}><h6>Colleges</h6></Link>
+                                    <Link to={'/usercollege'} style={{textDecoration:'none',color:"white"}}><h6>Colleges</h6></Link>
                                 </li>
                                 {/* <li className="nav-item">
                                     <h6>About</h6>
                                 </li> */}
                                 <li className="nav-item">
-                                    <Link to={`/appliedcolleges/${id}`}><h6>Applied Colleges</h6></Link>
+                                    <Link to={`/appliedcolleges/${id}`} style={{textDecoration:'none',color:"white"}}><h6>Applied Colleges</h6></Link>
                                 </li>
                                 <li>
-                                    <Link to={'/login'}>Logout</Link>
+                                    <Link to={'/login'} style={{textDecoration:'none',color:"white"}}>Logout</Link>
                                 </li>
                             </ul>
                         </div>

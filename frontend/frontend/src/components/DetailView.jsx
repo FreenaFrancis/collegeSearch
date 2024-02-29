@@ -6,7 +6,8 @@ import { Link, useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
 function DetailView() {
   const [details, setDetails] = useState({});
   const { id } = useParams(); // Retrieve id from URL params
@@ -22,13 +23,15 @@ function DetailView() {
   return (
     <div>
       <div className='na'>
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="dark" variant="dark" >
           <Container>
+          <Link to={'/home'}><FontAwesomeIcon icon={faArrowLeft} style={{marginTop:'10px',color:"white", paddingRight:'10px'}}/></Link>
             <Nav className="me-auto">
               <Nav.Link as={Link} to={`/overview/${id}`} style={{ color: 'white' }}>Overview</Nav.Link>
-              <Nav.Link as={Link} to={`/viewcourse/${id}`} style={{ color: 'white' }}>Course</Nav.Link>
+              
               <Nav.Link as={Link} to={`/viewplacement/${id}`} style={{ color: 'white' }}>Placement</Nav.Link>
               <Nav.Link as={Link} to={`/viewrecruiter/${id}`} style={{ color: 'white' }}>Our Recuriters</Nav.Link>
+              <Nav.Link as={Link} to={`/viewcourse/${id}`} style={{ color: 'white' }}>Course</Nav.Link>
             </Nav>
           </Container>
         </Navbar>

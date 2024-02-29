@@ -1,0 +1,10 @@
+.navs {
+    background-image: url(https://img.jagranjosh.com/imported/images/E/Articles/Scholarly-Search-engines-for-college-students.webp);
+    background-size: cover;
+    position: relative; /* Ensure proper positioning */
+}
+
+.navbar {
+    position: relative; /* Ensure proper positioning */
+    z-index: 1; /* Make sure Navbar stays on top */
+}

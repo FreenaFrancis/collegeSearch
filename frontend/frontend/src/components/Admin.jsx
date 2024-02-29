@@ -70,8 +70,9 @@ function Admin() {
          <Link to={'/adminviewplacement'}  style={{color:'white',textDecoration:'none'}}>    Manage Placements</Link>
             </Typography>
             
+            
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to={'/adminviewcollege'}  style={{color:'white',textDecoration:'none'}}>    Manage Colleeg</Link>
+            <Link to={'/adminviewcollege'}  style={{color:'white',textDecoration:'none'}}>    Manage College</Link>
             </Typography>
             <h2>{message}</h2>
           </Toolbar>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
+import { Link } from 'react-router-dom';
 function UserView() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
@@ -24,7 +26,8 @@ function UserView() {
 
   return (
     <div className="container">
-      <h2 style={{paddingLeft:'600px', marginTop:'100px'}}>User Table</h2>
+             <Link to={'/admin'}><FontAwesomeIcon icon={faArrowLeft} style={{color:"black", paddingTop:'50px'}}/></Link>
+      <h2 style={{paddingLeft:'600px', }}>User Table</h2>
       <table className="table table-striped">
         <thead className="thead-dark">
           <tr>

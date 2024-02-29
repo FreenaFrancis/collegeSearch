@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
+import { Link } from 'react-router-dom';
 const AddCourse = () => {
   const [formData, setFormData] = useState({
     coursename: '',
@@ -33,6 +35,8 @@ const AddCourse = () => {
   };
 
   return (
+    <div>
+        <Link to={'/admin'}><FontAwesomeIcon icon={faArrowLeft} style={{color:"black", paddingTop:'50px',marginLeft:'100px'}}/></Link>
     <form onSubmit={handleSubmit}>
       <div className="container mt-4">
         <div className="row">
@@ -94,6 +98,7 @@ const AddCourse = () => {
         </div>
       </div>
     </form>
+    </div>
   );
 };
 

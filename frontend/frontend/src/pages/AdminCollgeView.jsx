@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
 function AdminViewCollege() {
   const [colleges, setColleges] = useState([]);
 
@@ -30,7 +31,19 @@ function AdminViewCollege() {
 
   return (
     <div className="container">
-      <h2 className="my-4">Colleges</h2>
+      <div style={{display:'flex',justifyContent:'flex-start'}}>
+        <div >
+
+     
+      <Link to={'/admin'}><FontAwesomeIcon icon={faArrowLeft} style={{color:"black", paddingTop:'50px',marginLeft:'100px'}}/></Link>
+      </div>
+      <div>
+      <h2 className="my-4" style={{paddingLeft:'500px',marginTop:'150px'}}>Colleges</h2>
+      </div>
+      </div>
+   
+ <div>
+     
       <div className="table-responsive">
         <table className="table table-bordered table-striped">
           <thead className="thead-dark">
@@ -73,6 +86,7 @@ function AdminViewCollege() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

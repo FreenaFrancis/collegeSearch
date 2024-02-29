@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
+import { Link, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
 function ViewCourse() {
   const [courses, setCourses] = useState([]);
-
+const id=useParams()
   useEffect(() => {
     // Fetch data from MongoDB
     axios.get('http://localhost:7000/api/college/allcourse')
@@ -19,6 +20,7 @@ function ViewCourse() {
 
   return (
     <div>
+       {/* <Link to={'/userdetails/'+id}><FontAwesomeIcon icon={faArrowLeft} style={{marginTop:'10px',color:"black",paddingLeft:'50px'}}/></Link> */}
       <h2 style={{textAlign:'center'}}>Courses</h2>
       <div className="container">
         <table>

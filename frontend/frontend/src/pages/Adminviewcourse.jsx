@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Assuming you're using axios for HTTP requests
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
 function AdminViewCourse() {
   const [courses, setCourses] = useState([]);
 
@@ -30,8 +31,9 @@ function AdminViewCourse() {
    // Run this effect only once, when the component mounts
 
   return (
-    <div>
-      <h2>Courses</h2>
+    <div className='container'>
+      <Link to={'/admin'}><FontAwesomeIcon icon={faArrowLeft} style={{color:"black", marginTop:'50px',marginLeft:'100px'}}/></Link>
+      <h2 style={{paddingLeft:'500px'}}>Courses</h2>
       <table>
         <thead>
           <tr>

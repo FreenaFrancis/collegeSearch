@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
+import { Link } from 'react-router-dom';
 const AddRecruiter = () => {
     const [formData, setFormData] = useState({
         companyname: '',
@@ -44,7 +46,8 @@ const AddRecruiter = () => {
 
     return (
         <div>
-            <h2 style={{ paddingLeft: '500px', marginTop: '50px' }}>Recruiter Form</h2>
+                      <Link to={'/admin'}><FontAwesomeIcon icon={faArrowLeft} style={{color:"black", paddingTop:'50px',marginLeft:'100px'}}/></Link>
+            <h2 style={{ paddingLeft: '500px', marginTop: '50px' }}>Recruiter</h2>
             <div className='container'>
                 <form onSubmit={handleSubmit}>
                     <div>

@@ -3,7 +3,9 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; 
+import { Link } from 'react-router-dom';
 function AddCollege() {
   const [formData, setFormData] = useState({
     collegename: '',
@@ -47,6 +49,7 @@ function AddCollege() {
 
   return (
     <div className='container'>
+              <Link to={'/admin'}><FontAwesomeIcon icon={faArrowLeft} style={{color:"black", paddingTop:'50px',marginLeft:'100px'}}/></Link>
       <h2 style={{marginLeft:'600px'}}>Add College</h2>
     <Form onSubmit={handleSubmit}>
       
